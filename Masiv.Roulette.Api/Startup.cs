@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MySql.Data.MySqlClient;
+using System.Data.Common;
 
 namespace Masiv.Roulette.Api
 {
@@ -18,6 +20,8 @@ namespace Masiv.Roulette.Api
         {
             services.AddCors();
             services.AddControllers();
+            services
+                .AddScoped<DbConnection>(x => new MySqlConnection(Database.BuildConnectionString(Configuration)))
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -26,8 +30,12 @@ namespace Masiv.Roulette.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseHttpsRedirection();
-            app.UseRouting();
+            app.UseHttpsRedirection(); 
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true)
+                .AllowCredentials());
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
