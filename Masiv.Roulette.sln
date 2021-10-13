@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31613.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masiv.Roulette.Api", "Masiv.Roulette.Api\Masiv.Roulette.Api.csproj", "{E50AB168-2E09-4DC8-9E28-B465C0410854}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masiv.Roulette.Api", "Masiv.Roulette.Api\Masiv.Roulette.Api.csproj", "{E50AB168-2E09-4DC8-9E28-B465C0410854}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masiv.Roulette.Data", "Masiv.Roulette.Data\Masiv.Roulette.Data.csproj", "{7076EE81-7773-4516-832F-5FCC4B071890}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masiv.Roulette.Data", "Masiv.Roulette.Data\Masiv.Roulette.Data.csproj", "{7076EE81-7773-4516-832F-5FCC4B071890}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masiv.Roulette.Model", "Masiv.Roulette.Model\Masiv.Roulette.Model.csproj", "{A7749E49-45E8-4FAE-AE4B-E394437CC11E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masiv.Roulette.Model", "Masiv.Roulette.Model\Masiv.Roulette.Model.csproj", "{A7749E49-45E8-4FAE-AE4B-E394437CC11E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masiv.Roulette.Service", "Masiv.Roulette.Service\Masiv.Roulette.Service.csproj", "{01BAF1B7-4E7F-412F-8DCE-6AB914CF1960}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masiv.Roulette.Service", "Masiv.Roulette.Service\Masiv.Roulette.Service.csproj", "{01BAF1B7-4E7F-412F-8DCE-6AB914CF1960}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masiv.Roulette.ServiceDependencies", "Masiv.Roulette.ServiceDependencies\Masiv.Roulette.ServiceDependencies.csproj", "{2A76018A-B9AC-41F9-8623-8BA387639743}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masiv.Roulette.ServiceDependencies", "Masiv.Roulette.ServiceDependencies\Masiv.Roulette.ServiceDependencies.csproj", "{2A76018A-B9AC-41F9-8623-8BA387639743}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masiv.Roulette.Common", "Masiv.Roulette.Common\Masiv.Roulette.Common.csproj", "{E01D27AD-A2E5-41F1-8E79-D9E7CB8F84C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{2A76018A-B9AC-41F9-8623-8BA387639743}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A76018A-B9AC-41F9-8623-8BA387639743}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A76018A-B9AC-41F9-8623-8BA387639743}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E01D27AD-A2E5-41F1-8E79-D9E7CB8F84C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E01D27AD-A2E5-41F1-8E79-D9E7CB8F84C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E01D27AD-A2E5-41F1-8E79-D9E7CB8F84C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E01D27AD-A2E5-41F1-8E79-D9E7CB8F84C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

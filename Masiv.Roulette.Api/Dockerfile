@@ -1,8 +1,5 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-#Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
-#For more information, please see https://aka.ms/containercompat
-
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
 EXPOSE 80
@@ -11,6 +8,11 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["Masiv.Roulette.Api/Masiv.Roulette.Api.csproj", "Masiv.Roulette.Api/"]
+COPY ["Masiv.Roulette.Service/Masiv.Roulette.Service.csproj", "Masiv.Roulette.Service/"]
+COPY ["Masiv.Roulette.Common/Masiv.Roulette.Common.csproj", "Masiv.Roulette.Common/"]
+COPY ["Masiv.Roulette.ServiceDependencies/Masiv.Roulette.ServiceDependencies.csproj", "Masiv.Roulette.ServiceDependencies/"]
+COPY ["Masiv.Roulette.Model/Masiv.Roulette.Model.csproj", "Masiv.Roulette.Model/"]
+COPY ["Masiv.Roulette.Data/Masiv.Roulette.Data.csproj", "Masiv.Roulette.Data/"]
 RUN dotnet restore "Masiv.Roulette.Api/Masiv.Roulette.Api.csproj"
 COPY . .
 WORKDIR "/src/Masiv.Roulette.Api"

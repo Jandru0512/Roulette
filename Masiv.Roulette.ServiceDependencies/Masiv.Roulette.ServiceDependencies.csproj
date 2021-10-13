@@ -4,4 +4,17 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Masiv.Roulette.Common\Masiv.Roulette.Common.csproj" />
+    <ProjectReference Include="..\Masiv.Roulette.Data\Masiv.Roulette.Data.csproj" />
+    <ProjectReference Include="..\Masiv.Roulette.Model\Masiv.Roulette.Model.csproj" />
+    <ProjectReference Include="..\Masiv.Roulette.Service\Masiv.Roulette.Service.csproj" />
+  </ItemGroup>
+
 </Project>

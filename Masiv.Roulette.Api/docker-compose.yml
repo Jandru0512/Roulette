@@ -15,7 +15,6 @@ services:
       - db
     ports:
       - "9000:9000"
-    privileged: true
     networks:
       - sonarnet
     environment:
@@ -30,6 +29,7 @@ services:
 
   db:
     image: postgres
+    restart: unless-stopped
     networks:
       - sonarnet
     environment:
@@ -42,6 +42,8 @@ services:
   mysql_db:
     image: mysql
     restart: unless-stopped
+    networks:
+      - mysqlnet
     ports:
       - "3306:3306"
     environment:
@@ -50,8 +52,10 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - dbdata:/var/lib/mysql
-      
+          
 networks:
+  mysqlnet:
+    driver: bridge
   sonarnet:
     driver: bridge
  
