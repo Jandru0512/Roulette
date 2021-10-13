@@ -2,6 +2,8 @@
 using Masiv.Roulette.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 
 namespace Masiv.Roulette.Api
@@ -11,11 +13,13 @@ namespace Masiv.Roulette.Api
     public class LoginController : ControllerBase
     {
         private readonly IConfiguration _configuration;
+        private readonly ILogger<LoginController> _logger;
         private readonly ILoginService _loginService;
 
-        public LoginController(IConfiguration configuration, ILoginService loginService)
+        public LoginController(IConfiguration configuration, ILogger<LoginController> logger, ILoginService loginService)
         {
             _configuration = configuration;
+            _logger = logger;
             _loginService = loginService;
         }
 
@@ -23,6 +27,7 @@ namespace Masiv.Roulette.Api
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto login)
         {
+            _logger.LogInformation($"Logging user {login.Username}.");
             TokenDto token = new TokenDto
             {
                 Audience = _configuration["Tokens:Audience"],
@@ -30,7 +35,14 @@ namespace Masiv.Roulette.Api
                 Key = _configuration["Tokens:Key"]
             };
             AuthenticationDto authentication = await _loginService.Login(login, token);
-            return Created(string.Empty, authentication);
+            if (authentication != null)
+            {
+                _logger.LogInformation($"User {login.Username} logged.");
+                return Created(string.Empty, authentication);
+            }
+
+            _logger.LogInformation($"Error logging {login.Username}.");
+            return BadRequest();
         }
     }
 }
