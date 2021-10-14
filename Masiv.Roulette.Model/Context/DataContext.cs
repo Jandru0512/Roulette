@@ -9,6 +9,10 @@ namespace Masiv.Roulette.Model
         public DataContext(DbContextOptions options) : base(options)
         {
         }
+
+        public DbSet<Bet> Bets { get; set; }
+        public DbSet<Roulette> Roulettes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

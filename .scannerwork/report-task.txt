@@ -2,5 +2,5 @@ projectKey=roulette
 serverUrl=http://localhost:9000
 serverVersion=9.1.0.47736
 dashboardUrl=http://localhost:9000/dashboard?id=roulette
-ceTaskId=AXx6HwqOQfF-4yuMFLQP
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AXx6HwqOQfF-4yuMFLQP
+ceTaskId=AXx7hNXaQfF-4yuMFLQR
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXx7hNXaQfF-4yuMFLQR
