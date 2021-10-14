@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
@@ -18,12 +19,12 @@ namespace Masiv.Roulette.Data
         }
 
         protected abstract string TableName { get; }
-        public abstract Task<T> InsertSingle(T obj);
-        public abstract Task<T> UpdateSingle(T obj);
+        public abstract Task<string> InsertSingle(T entity);
+        public abstract Task<string> UpdateSingle(T entity);
 
-        public async Task<T> GetById(int id)
+        protected async Task<T> GetById(int id)
         {
-            string sql = $"delete from {TableName} Where id = @id";
+            string sql = $"SELECT * FROM {TableName} Where id = @id";
             DbConnection connection = await _conectionWrapper.GetConnectionAsync();
             DbCommand command = connection.CreateCommand();
             command.CommandText = sql;
@@ -40,9 +41,9 @@ namespace Masiv.Roulette.Data
             }
         }
 
-        public async Task<List<T>> GetList()
+        protected async Task<List<T>> GetList()
         {
-            string sql = $"select * from {TableName}";
+            string sql = $"SELECT * FROM {TableName}";
             DbConnection connection = await _conectionWrapper.GetConnectionAsync();
             DbCommand command = connection.CreateCommand();
             command.CommandText = sql;
@@ -54,20 +55,35 @@ namespace Masiv.Roulette.Data
             }
         }
 
-
-        public async Task<List<T>> InsertList(List<T> obj)
+        protected async Task<int> Insert(T entity)
         {
-            return (await Task.WhenAll(obj.Select(a => InsertSingle(a)))).ToList();
+            string sql = $"INSERT INTO {TableName} {await InsertSingle(entity)}; SELECT LAST_INSERT_ID();";
+            DbConnection connection = await _conectionWrapper.GetConnectionAsync();
+            DbCommand command = connection.CreateCommand();
+            command.CommandText = sql;
+            command.CommandType = CommandType.Text;
+            int id = Convert.ToInt32(await command.ExecuteScalarAsync());
+            await CommitTransaction();
+
+            return id;
         }
 
-        public async Task<List<T>> UpdateList(List<T> obj)
+        protected async Task<int> Update(T entity)
         {
-            return (await Task.WhenAll(obj.Select(a => UpdateSingle(a)))).ToList();
+            string sql = $"UPDATE {TableName} {await UpdateSingle(entity)}; SELECT LAST_INSERT_ID();";
+            DbConnection connection = await _conectionWrapper.GetConnectionAsync();
+            DbCommand command = connection.CreateCommand();
+            command.CommandText = sql;
+            command.CommandType = CommandType.Text;
+            int id = Convert.ToInt32(await command.ExecuteScalarAsync());
+            await CommitTransaction();
+
+            return id;
         }
 
-        public async Task<int> Delete(int id)
+        protected async Task<int> Delete(int id)
         {
-            string sql = $"delete from {TableName} Where id = @id";
+            string sql = $"DELETE FROM {TableName} WHERE id = @id";
             DbConnection connection = await _conectionWrapper.GetConnectionAsync();
             DbCommand command = connection.CreateCommand();
             command.CommandText = sql;
@@ -78,11 +94,12 @@ namespace Masiv.Roulette.Data
             parameter.Value = id;
             command.Parameters.Add(parameter);
             await command.ExecuteNonQueryAsync();
+            await CommitTransaction();
 
             return id;
         }
 
-        public async Task CommitTransaction()
+        protected async Task CommitTransaction()
         {
             await _conectionWrapper.CommitTransactionAsync();
         }

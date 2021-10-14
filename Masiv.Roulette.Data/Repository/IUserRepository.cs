@@ -8,7 +8,5 @@ namespace Masiv.Roulette.Data
     {
         Task<IdentityResult> AddUser(User user, string password);
         Task<User> GetUser(string username);
-        Task<User> InsertSingle(User user);
-        Task<User> UpdateSingle(User user);
     }
 }

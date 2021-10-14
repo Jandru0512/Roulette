@@ -40,6 +40,7 @@ namespace Masiv.Roulette.ServiceDependencies
             return userDto;
         }
 
-        public async Task<SignInResult> ValidateLogin(LoginDto login) => await _signInManager.PasswordSignInAsync(login.Username, login.Password, true, false);
+        public async Task<SignInResult> ValidateLogin(LoginDto login) => 
+            await _signInManager.PasswordSignInAsync(login.Username, login.Password, true, false);
     }
 }

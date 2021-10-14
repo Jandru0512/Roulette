@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Data;
 using System.Data.Common;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Masiv.Roulette.Data
@@ -42,12 +41,12 @@ namespace Masiv.Roulette.Data
             }
         }
 
-        public override Task<User> InsertSingle(User obj)
+        public override Task<string> InsertSingle(User entity)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<User> UpdateSingle(User obj)
+        public override Task<string> UpdateSingle(User entity)
         {
             throw new NotImplementedException();
         }

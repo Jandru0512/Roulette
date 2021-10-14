@@ -86,12 +86,15 @@ namespace Masiv.Roulette.Api
                 .AddEntityFrameworkStores<DataContext>();
         }
 
-        private void AddInterfaces(IServiceCollection services)
+        private static void AddInterfaces(IServiceCollection services)
         {
             services.AddScoped<ICacheHelper, CacheHelper>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ILoginDependencies, LoginDependencies>();
             services.AddScoped<IQueryHelper, QueryHelper>();
+            services.AddScoped<IRouletteDependencies, RouletteDependencies>();
+            services.AddScoped<IRouletteRepository, RouletteRepository>();
+            services.AddScoped<IRouletteService, RouletteService>();
             services.AddScoped<ITransactionalWrapper, TransactionalWrapper>();
             services.AddScoped<IUserRepository, UserRepository>();
         }

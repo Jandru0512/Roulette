@@ -3,7 +3,6 @@ using Masiv.Roulette.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Threading.Tasks;
 
 namespace Masiv.Roulette.Api
@@ -28,7 +27,7 @@ namespace Masiv.Roulette.Api
         public async Task<IActionResult> Login([FromBody] LoginDto login)
         {
             _logger.LogInformation($"Logging user {login.Username}.");
-            TokenDto token = new TokenDto
+            TokenDto token = new()
             {
                 Audience = _configuration["Tokens:Audience"],
                 Issuer = _configuration["Tokens:Issuer"],
