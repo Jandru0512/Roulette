@@ -13,6 +13,9 @@ namespace Masiv.Roulette.Data
         public async Task<int> CreateRoulette(Model.Roulette roulette) =>
             await Insert(roulette);
 
+        public async Task<bool> OpenRoulette(Model.Roulette roulette) =>
+            await Update(roulette);
+
         public override Task<string> InsertSingle(Model.Roulette roulette)
         {
             StringBuilder builder = new();

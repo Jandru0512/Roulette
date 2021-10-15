@@ -68,17 +68,17 @@ namespace Masiv.Roulette.Data
             return id;
         }
 
-        protected async Task<int> Update(T entity)
+        protected async Task<bool> Update(T entity)
         {
-            string sql = $"UPDATE {TableName} {await UpdateSingle(entity)}; SELECT LAST_INSERT_ID();";
+            string sql = $"UPDATE {TableName} {await UpdateSingle(entity)};";
             DbConnection connection = await _conectionWrapper.GetConnectionAsync();
             DbCommand command = connection.CreateCommand();
             command.CommandText = sql;
             command.CommandType = CommandType.Text;
-            int id = Convert.ToInt32(await command.ExecuteScalarAsync());
+            await command.ExecuteScalarAsync();
             await CommitTransaction();
 
-            return id;
+            return true;
         }
 
         protected async Task<int> Delete(int id)

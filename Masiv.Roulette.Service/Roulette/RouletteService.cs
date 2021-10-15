@@ -24,5 +24,17 @@ namespace Masiv.Roulette.Service
             return await _dependencies.CreateRoulette(roulette);
         }
 
+        public async Task<bool> OpenRoulette(int id)
+        {
+            RouletteDto roulette = new()
+            {
+                Id = id,
+                UpdatedAt = DateTime.UtcNow,
+                Status = true
+            };
+
+            return await _dependencies.OpenRoulette(roulette);
+        }
+
     }
 }

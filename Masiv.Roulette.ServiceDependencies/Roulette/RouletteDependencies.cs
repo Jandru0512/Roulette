@@ -23,5 +23,12 @@ namespace Masiv.Roulette.ServiceDependencies
 
             return await _repository.CreateRoulette(roulette);
         }
+
+        public async Task<bool> OpenRoulette(RouletteDto rouletteDto)
+        {
+            Model.Roulette roulette = _mapper.Map<Model.Roulette>(rouletteDto);
+
+            return await _repository.OpenRoulette(roulette);
+        }
     }
 }

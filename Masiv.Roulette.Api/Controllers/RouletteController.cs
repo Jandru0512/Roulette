@@ -1,4 +1,5 @@
-﻿using Masiv.Roulette.Service;
+﻿using Masiv.Roulette.Common;
+using Masiv.Roulette.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -32,8 +33,24 @@ namespace Masiv.Roulette.Api
                 _logger.LogInformation($"Roulette {id} created.");
                 return Created(string.Empty, id);
             }
-
             _logger.LogInformation($"Error creating roulette.");
+            return BadRequest();
+        }
+
+        [HttpPut]
+        [Route("openRoulette")]
+        public async Task<IActionResult> OpenRoulette([FromBody] RouletteDto roulette)
+        {
+            _logger.LogInformation($"Opening roulette {roulette.Id}.");
+            if (roulette.Id != 0) {
+                bool status = await _rouletteService.OpenRoulette(roulette.Id);
+                if (status)
+                {
+                    _logger.LogInformation($"Roulette {roulette.Id} opened.");
+                    return Created(string.Empty, status);
+                }
+            }
+            _logger.LogInformation($"Error opening roulette.");
             return BadRequest();
         }
     }
