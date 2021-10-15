@@ -88,6 +88,9 @@ namespace Masiv.Roulette.Api
 
         private static void AddInterfaces(IServiceCollection services)
         {
+            services.AddScoped<IBetDependencies, BetDependencies>();
+            services.AddScoped<IBetRepository, BetRepository>();
+            services.AddScoped<IBetService, BetService>();
             services.AddScoped<ICacheHelper, CacheHelper>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ILoginDependencies, LoginDependencies>();

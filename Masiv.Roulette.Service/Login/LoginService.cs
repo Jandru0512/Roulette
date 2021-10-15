@@ -31,9 +31,9 @@ namespace Masiv.Roulette.Service
                         new Claim(JwtRegisteredClaimNames.Sub, login.Username),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                     };
-                    SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.Key));
-                    SigningCredentials credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                    JwtSecurityToken token = new JwtSecurityToken(
+                    SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(configuration.Key));
+                    SigningCredentials credentials = new(key, SecurityAlgorithms.HmacSha256);
+                    JwtSecurityToken token = new(
                         configuration.Issuer,
                         configuration.Audience,
                         claims,

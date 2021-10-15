@@ -13,10 +13,13 @@ namespace Masiv.Roulette.Data
         public async Task<int> CreateRoulette(Model.Roulette roulette) =>
             await Insert(roulette);
 
+        public async Task<Model.Roulette> GetRoulette(int id) =>
+            await GetById(id);
+
         public async Task<bool> OpenRoulette(Model.Roulette roulette) =>
             await Update(roulette);
 
-        public override Task<string> InsertSingle(Model.Roulette roulette)
+        protected override Task<string> InsertSingle(Model.Roulette roulette)
         {
             StringBuilder builder = new();
             builder.Append($"(Status, CreatedAt) ");
@@ -25,7 +28,7 @@ namespace Masiv.Roulette.Data
             return Task.FromResult(builder.ToString());
         }
 
-        public override Task<string> UpdateSingle(Model.Roulette roulette)
+        protected override Task<string> UpdateSingle(Model.Roulette roulette)
         {
             StringBuilder builder = new();
             builder.Append($"SET Status = {roulette.Status}, UpdatedAt = '{roulette.UpdatedAt:yyyy-MM-dd H:mm:ss}' ");

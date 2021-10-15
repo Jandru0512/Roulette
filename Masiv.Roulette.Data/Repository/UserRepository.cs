@@ -41,12 +41,12 @@ namespace Masiv.Roulette.Data
             }
         }
 
-        public override Task<string> InsertSingle(User entity)
+        protected override Task<string> InsertSingle(User entity)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<string> UpdateSingle(User entity)
+        protected override Task<string> UpdateSingle(User entity)
         {
             throw new NotImplementedException();
         }

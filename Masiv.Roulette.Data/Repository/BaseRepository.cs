@@ -19,8 +19,8 @@ namespace Masiv.Roulette.Data
         }
 
         protected abstract string TableName { get; }
-        public abstract Task<string> InsertSingle(T entity);
-        public abstract Task<string> UpdateSingle(T entity);
+        protected abstract Task<string> InsertSingle(T entity);
+        protected abstract Task<string> UpdateSingle(T entity);
 
         protected async Task<T> GetById(int id)
         {

@@ -8,6 +8,7 @@ namespace Masiv.Roulette.Api
     {
         public AutoMapping()
         {
+            CreateMap<Bet, BetDto>().ReverseMap();
             CreateMap<Model.Roulette, RouletteDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
         }

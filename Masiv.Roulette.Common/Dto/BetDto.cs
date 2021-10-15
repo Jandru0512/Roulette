@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Masiv.Roulette.Model
+namespace Masiv.Roulette.Common
 {
-    public class Bet
+    public class BetDto
     {
         [Key]
         public int Id { get; set; }
@@ -16,7 +20,6 @@ namespace Masiv.Roulette.Model
         public DateTime CreatedAt { get; set; }
         public int RouletteId { get; set; }
         public string UserId { get; set; }
-        public Roulette Roulette { get; set; }
-        public User User { get; set; }
+        public UserDto User { get; set; }
     }
 }
