@@ -2,7 +2,7 @@
 Masiv Roulette is an application to manage roulettes and a place for user bets.
 
 ## Requirements
-* VisualStudio 209
+* VisualStudio 2019
 * .NET Core 5
 * Docker
 * Docker compose
