@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Masiv.Roulette.Model\Masiv.Roulette.Model.csproj" />
+    <ProjectReference Include="..\Masiv.Roulette.Service\Masiv.Roulette.Service.csproj" />
   </ItemGroup>
 
 </Project>

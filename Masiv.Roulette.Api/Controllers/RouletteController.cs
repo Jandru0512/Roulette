@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Masiv.Roulette.Api
@@ -20,6 +21,16 @@ namespace Masiv.Roulette.Api
         {
             _logger = logger;
             _rouletteService = rouletteService;
+        }
+
+        [HttpPut]
+        [Route("closeRoulette")]
+        public async Task<IActionResult> CloseRoulette([FromBody] RouletteDto roulette)
+        {
+            _logger.LogInformation($"Closing roulette {roulette.Id}.");
+            List<BetDto> bets = await _rouletteService.CloseRoulette(roulette.Id);
+            _logger.LogInformation($"Roulette {roulette.Id} closed.");
+            return Created(string.Empty, bets);
         }
 
         [HttpPost]
@@ -42,7 +53,8 @@ namespace Masiv.Roulette.Api
         public async Task<IActionResult> OpenRoulette([FromBody] RouletteDto roulette)
         {
             _logger.LogInformation($"Opening roulette {roulette.Id}.");
-            if (roulette.Id != 0) {
+            if (roulette.Id != 0)
+            {
                 bool status = await _rouletteService.OpenRoulette(roulette.Id);
                 if (status)
                 {

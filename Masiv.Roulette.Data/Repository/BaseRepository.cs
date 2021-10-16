@@ -51,7 +51,7 @@ namespace Masiv.Roulette.Data
 
             using (DbDataReader reader = await command.ExecuteReaderAsync())
             {
-                return reader.Cast<T>().ToList();
+                return _queryHelper.CreateList<T>(reader);
             }
         }
 

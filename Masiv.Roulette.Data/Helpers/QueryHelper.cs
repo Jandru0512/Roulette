@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data.Common;
 using System.Linq;
 using System.Reflection;
@@ -13,24 +12,52 @@ namespace Masiv.Roulette.Data
         {
             if (reader.HasRows)
             {
-                T record = (T)Activator.CreateInstance(typeof(T));
                 PropertyInfo[] properties = typeof(T).GetProperties();
                 List<string> schema = reader.GetColumnSchema().Select((x) => x.ColumnName).ToList();
                 while (reader.Read())
                 {
-                    foreach (PropertyInfo property in properties)
-                    {
-                        if (schema.Contains(property.Name))
-                        {
-                            property.SetValue(record, reader.GetValue(reader.GetOrdinal(property.Name)));
-                        }
-                    }
+                    return MapResult<T>(reader, properties, schema);
                 }
-
-                return record;
             }
 
             return null;
+        }
+
+        public List<T> CreateList<T>(DbDataReader reader) where T : class
+        {
+            if (reader.HasRows)
+            {
+                List<T> list = new();
+                PropertyInfo[] properties = typeof(T).GetProperties();
+                List<string> schema = reader.GetColumnSchema().Select((x) => x.ColumnName).ToList();
+                while (reader.Read())
+                {
+                    list.Add(MapResult<T>(reader, properties, schema));
+                }
+
+                return list;
+            }
+
+            return null;
+        }
+
+        private static T MapResult<T>(DbDataReader reader, PropertyInfo[] properties, List<string> schema)
+        {
+            T record = (T)Activator.CreateInstance(typeof(T));
+            foreach (PropertyInfo property in properties)
+            {
+                if (schema.Contains(property.Name))
+                {
+                    object value = reader.GetValue(reader.GetOrdinal(property.Name));
+                    if (value == DBNull.Value)
+                    {
+                        value = null;
+                    }
+                    property.SetValue(record, value);
+                }
+            }
+
+            return record;
         }
     }
 }
