@@ -42,6 +42,9 @@ namespace Masiv.Roulette.Data
         public async Task<Model.Roulette> GetRoulette(int id) =>
             await GetById(id);
 
+        public async Task<List<Model.Roulette>> List() =>
+            await GetList();
+
         public async Task<bool> OpenRoulette(Model.Roulette roulette) =>
             await Update(roulette);
 

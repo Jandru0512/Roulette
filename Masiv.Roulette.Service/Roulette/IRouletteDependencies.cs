@@ -9,6 +9,7 @@ namespace Masiv.Roulette.Service
         Task<List<BetDto>> CloseRoulette(RouletteDto rouletteDto);
         Task<int> CreateRoulette(RouletteDto rouletteDto);
         Task<RouletteDto> GetRoulette(int id);
+        Task<List<RouletteDto>> List();
         Task<bool> OpenRoulette(RouletteDto rouletteDto);
     }
 }

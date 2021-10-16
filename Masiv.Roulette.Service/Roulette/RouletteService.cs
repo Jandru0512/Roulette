@@ -17,7 +17,7 @@ namespace Masiv.Roulette.Service
         public async Task<List<BetDto>> CloseRoulette(int id)
         {
             RouletteDto roulette = await _dependencies.GetRoulette(id);
-            if(roulette != null)
+            if (roulette != null)
             {
                 roulette.Status = false;
                 roulette.UpdatedAt = DateTime.UtcNow;
@@ -38,6 +38,9 @@ namespace Masiv.Roulette.Service
 
             return await _dependencies.CreateRoulette(roulette);
         }
+
+        public async Task<List<RouletteDto>> List() =>
+            await _dependencies.List();
 
         public async Task<bool> OpenRoulette(int id)
         {

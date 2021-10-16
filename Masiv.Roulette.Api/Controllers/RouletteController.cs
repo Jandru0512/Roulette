@@ -23,6 +23,16 @@ namespace Masiv.Roulette.Api
             _rouletteService = rouletteService;
         }
 
+        [HttpGet]
+        [Route("list")]
+        public async Task<IActionResult> List()
+        {
+            _logger.LogInformation($"Listing roulettes.");
+            List<RouletteDto> roulettes = await _rouletteService.List();
+            _logger.LogInformation($"Roulettes listed.");
+            return Created(string.Empty, roulettes);
+        }
+
         [HttpPut]
         [Route("closeRoulette")]
         public async Task<IActionResult> CloseRoulette([FromBody] RouletteDto roulette)

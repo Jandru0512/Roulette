@@ -26,14 +26,14 @@ namespace Masiv.Roulette.ServiceDependencies
 
         public async Task<UserDto> GetUser(string username)
         {
-            UserDto userDto = await _cache.ResolveChace<UserDto>(username);
+            UserDto userDto = await _cache.ResolveCache<UserDto>(username);
             if (userDto == null)
             {
                 User user = await _userRepository.GetUser(username);
                 if (user != null)
                 {
                     userDto = _mapper.Map<UserDto>(user);
-                    await _cache.AddCache(username, userDto);
+                    await _cache.AddCache(userDto, username);
                 }
             }
 

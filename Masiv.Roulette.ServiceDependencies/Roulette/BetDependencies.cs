@@ -25,7 +25,7 @@ namespace Masiv.Roulette.ServiceDependencies
             Bet bet = _mapper.Map<Bet>(betDto);
             int id = await _betRepository.CreateBet(bet);
             betDto.Id = id;
-            await _cache.AddCache(betDto, id);
+            await _cache.AddCache(betDto, id.ToString());
 
             return id;
         }
